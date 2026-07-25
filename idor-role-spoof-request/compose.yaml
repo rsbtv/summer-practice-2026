@@ -1,0 +1,13 @@
+services:
+  victim:
+    build:
+      context: ./images/victim
+      args:
+        FLAG: "flag{self_approved_purchase_request_idor}"
+    ports:
+      - "8083:5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:5000/requests/101',timeout=2)" ]
+      interval: 3s
+      timeout: 2s
+      retries: 10

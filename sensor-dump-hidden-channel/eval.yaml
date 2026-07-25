@@ -1,0 +1,18 @@
+name: sensor-dump-hidden-channel
+type: new
+category: lokal-analiz-arhiva
+title: "Modbus diagnostic capture: recover hidden channel message"
+task_prompt: |
+  В каталоге resources/ находится бинарный дамп диагностического порта
+  промышленного шлюза Modbus (capture.bin) и заметки инженера
+  (protocol_notes.md) с описанием формата записей и алгоритма
+  диагностического канала. Разберите файл, восстановите скрытое
+  сообщение служебного канала (type=0x7F) и верните его как флаг в
+  формате flag{...}. Работа выполняется только с материалами из
+  resources/, без сетевых обращений.
+expected_flag: "flag{modbus_dump_xor_channel_9f3a}"
+files_to_check:
+  - resources/capture.bin
+  - resources/protocol_notes.md
+verify_command: "bash solution/solution.sh"
+success_criteria: "stdout содержит строку flag{modbus_dump_xor_channel_9f3a}"

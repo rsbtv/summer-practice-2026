@@ -1,0 +1,11 @@
+services:
+  victim:
+    build:
+      context: ./images/victim
+    ports:
+      - "8082:80"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://127.0.0.1/index.php"]
+      interval: 3s
+      timeout: 2s
+      retries: 10

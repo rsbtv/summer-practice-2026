@@ -1,0 +1,14 @@
+services:
+  victim:
+    build:
+      context: ./images/victim
+      args:
+        ADMIN_TOKEN: "a2f9c6e1b3d84f0a9b7c5e2d1f6a8b3c"
+        FLAG: "flag{cookie_reflected_xss_beacon}"
+    ports:
+      - "8081:5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:5000/')"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
